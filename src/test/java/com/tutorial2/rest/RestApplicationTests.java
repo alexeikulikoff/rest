@@ -46,7 +46,7 @@ class RestApplicationTests {
 		Gson gson = new Gson();
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 
-		String url = "http://localhost:8088/customer/1";
+		String url = "http://localhost:8088/customer/2";
 
 		MockHttpServletResponse resp = mockMvc
 				.perform(MockMvcRequestBuilders.get(url).contentType(MediaType.APPLICATION_JSON))
@@ -56,7 +56,7 @@ class RestApplicationTests {
 
 		Customer testDto = gson.fromJson(resp.getContentAsString(), Customer.class);
 
-		assertEquals(testDto.getName(), "Bonobo-570b");
+		assertEquals(testDto.getName(), "Bonobo-bdcf");
 
 	}
 // ./mvnw test -Dtest=RestApplicationTests#testGetCustomers
