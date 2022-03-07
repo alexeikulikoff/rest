@@ -50,7 +50,13 @@ public class CustomerController {
 	@DeleteMapping("/customer/{id}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable("id") Long id) {
 
-		customersRepository.deleteById(id);
+		Optional<Customers> opt = customersRepository.findById(id);
+		if (opt.isPresent()) {
+
+			Customers customers = opt.get();
+			customersRepository.delete(customers);
+
+		}
 
 		return ResponseEntity.status(200).body("Delete Cusomer with id: " + id);
 	}
