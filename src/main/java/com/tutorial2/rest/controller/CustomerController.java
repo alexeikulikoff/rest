@@ -94,7 +94,7 @@ public class CustomerController {
 			return ResponseEntity.status(200).body(test.getId().toString());
 		}
 
-		return ResponseEntity.status(400).body("Not Fine");
+		return ResponseEntity.status(400).body("Error saving customer!");
 	}
 
 }
