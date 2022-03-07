@@ -31,7 +31,6 @@ public class CustomerController {
 		return ResponseEntity.ok("HelloWorld");
 	}
 
-/// Data Transfer Object
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
 
@@ -53,7 +52,7 @@ public class CustomerController {
 
 		customersRepository.deleteById(id);
 
-		return ResponseEntity.status(200).body("Hello");
+		return ResponseEntity.status(200).body("Delete Cusomer with id: " + id);
 	}
 
 	@GetMapping("/customers")
