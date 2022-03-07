@@ -56,9 +56,13 @@ public class CustomerController {
 			Customers customers = opt.get();
 			customersRepository.delete(customers);
 
+			Optional<Customers> testOpt = customersRepository.findById(id);
+			return testOpt.isPresent() ? ResponseEntity.status(200).body("Delete Cusomer with id: " + id)
+					: ResponseEntity.status(400).body("Error Delete Cusomer with id: " + id);
+
 		}
 
-		return ResponseEntity.status(200).body("Delete Cusomer with id: " + id);
+		return ResponseEntity.status(400).body("Error Delete Cusomer with id: " + id);
 	}
 
 	@GetMapping("/customers")
