@@ -1,20 +1,23 @@
 package com.tutorial2.rest.dto;
 
-public class Goods {
+public class Good {
 
 	private Long id;
 	private String name;
 	private Double price;
+	private String Наименование;
 
-	public Goods() {
+	public Good() {
 		super();
 	}
 
-	public Goods(Long id, String name, Double price) {
+	public Good(Long id, String name, String Наименование, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.Наименование = Наименование;
 		this.price = price;
+
 	}
 
 	public Long getId() {
@@ -33,6 +36,14 @@ public class Goods {
 		this.name = name;
 	}
 
+	public String getNaim() {
+		return Наименование;
+	}
+
+	public void setNaim(String Наименование) {
+		this.Наименование = Наименование;
+	}
+
 	public Double getPrice() {
 		return price;
 	}
@@ -40,5 +51,6 @@ public class Goods {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+
 
 }
