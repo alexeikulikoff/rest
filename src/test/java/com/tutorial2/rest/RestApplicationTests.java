@@ -27,8 +27,10 @@ import org.springframework.web.context.WebApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tutorial2.rest.domain.Customers;
+import com.tutorial2.rest.domain.Storage;
 import com.tutorial2.rest.dto.Customer;
 import com.tutorial2.rest.repository.CustomersRepository;
+import com.tutorial2.rest.repository.StorageRepository;
 
 @SpringBootTest(classes = { RestApplication.class })
 @EnableJpaRepositories("com.tutorial2.rest.repository")
@@ -40,6 +42,51 @@ class RestApplicationTests {
 
 	@Autowired
 	private CustomersRepository customersRepository;
+
+	@Autowired
+	private StorageRepository storageRepository;
+
+	@Test
+	void addCustomers() {
+
+		Storage s1 = storageRepository.findById(8L).get();
+
+		Customers c1 = new Customers();
+		c1.setName("A1");
+
+		Customers c2 = new Customers();
+		c2.setName("A1");
+		List<Customers> customers = new ArrayList<>();
+		;
+		customers.add(c1);
+		customers.add(c2);
+
+		s1.customers.addAll(customers);
+
+		Storage s2 = storageRepository.save(s1);
+
+		s1.customers.remove(c2);
+
+		s2.customers.stream().forEach(c -> {
+			System.out.println(c);
+		});
+		int a = 4;
+		assertEquals(2 + 2, a);
+
+	}
+
+	@Test
+	void removeAllStorage() {
+
+		List<Storage> storages = storageRepository.findAll();
+		storages.forEach(s -> {
+			storageRepository.delete(s);
+		});
+
+		int a = 4;
+		assertEquals(2 + 2, a);
+
+	}
 
 	@Test
 	void testGetCustomer() throws Exception {

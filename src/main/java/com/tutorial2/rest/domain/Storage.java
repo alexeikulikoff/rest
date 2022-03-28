@@ -2,6 +2,8 @@ package com.tutorial2.rest.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,18 +15,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SortNatural;
+
 @Entity
-@Table(name = "orders")
-public class Orders {
+@Table(name = "storage")
+public class Storage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Goods> goods = new ArrayList<>();
+	public List<Goods> goods = new ArrayList<>();
 
+	@SortNatural
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Customers> customers = new ArrayList<>();;
+	public SortedSet<Customers> customers = new TreeSet<>();;
 
 	@Column(name = "quantity")
 	private Integer quantity;

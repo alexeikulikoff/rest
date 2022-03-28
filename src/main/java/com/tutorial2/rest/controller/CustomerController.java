@@ -1,18 +1,25 @@
 package com.tutorial2.rest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.tutorial2.rest.domain.Customers;
 import com.tutorial2.rest.domain.Goods;
 import com.tutorial2.rest.dto.Customer;
 import com.tutorial2.rest.dto.Good;
 import com.tutorial2.rest.repository.CustomersRepository;
 import com.tutorial2.rest.repository.GoodsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8088")
@@ -23,7 +30,6 @@ public class CustomerController {
 
 	@Autowired
 	private GoodsRepository goodsRepository;
-
 
 	@GetMapping("/test")
 	public ResponseEntity<String> test() {
@@ -107,8 +113,7 @@ public class CustomerController {
 			Goods goods = opt.get();
 			Good result = new Good();
 			result.setId(goods.getId());
-	//		result.setName(goods.getName());
-			result.setNaim(goods.getNaim());
+			result.setName(goods.getName());
 			result.setPrice(goods.getPrice());
 
 			return ResponseEntity.status(200).body(result);
@@ -148,7 +153,6 @@ public class CustomerController {
 			Good co = new Good();
 			co.setId(goods.get(i).getId());
 			co.setName(goods.get(i).getName());
-			co.setNaim(goods.get(i).getNaim());
 			co.setPrice(goods.get(i).getPrice());
 			result.add(co);
 		}
@@ -160,7 +164,6 @@ public class CustomerController {
 	public ResponseEntity<String> saveGood(@RequestBody Good good) {
 
 		Goods goods = new Goods();
-		goods.setNaim(good.getNaim());
 		goods.setName(good.getName());
 		Goods test = goodsRepository.save(goods);
 		if (test != null) {
@@ -169,6 +172,5 @@ public class CustomerController {
 
 		return ResponseEntity.status(400).body("Error saving customer!");
 	}
-
 
 }
