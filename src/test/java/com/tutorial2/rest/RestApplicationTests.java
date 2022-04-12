@@ -1,6 +1,7 @@
 package com.tutorial2.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -9,6 +10,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -27,8 +30,10 @@ import org.springframework.web.context.WebApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tutorial2.rest.domain.Customers;
+import com.tutorial2.rest.domain.Phones;
 import com.tutorial2.rest.dto.Customer;
 import com.tutorial2.rest.repository.CustomersRepository;
+import com.tutorial2.rest.repository.PhoneRepository;
 
 @SpringBootTest(classes = { RestApplication.class })
 @EnableJpaRepositories("com.tutorial2.rest.repository")
@@ -40,6 +45,32 @@ class RestApplicationTests {
 
 	@Autowired
 	private CustomersRepository customersRepository;
+
+	@Autowired
+	private PhoneRepository phoneRepository;
+
+	@Test
+	void testCustoerPhones() throws Exception {
+
+		Customers c = new Customers();
+
+		c.setName("77777777777777777");
+
+		SortedSet<Phones> phonseSet = new TreeSet<>();
+
+		Phones p1 = new Phones();
+		p1.setNumber("1000");
+		p1.setCustomer(c);
+
+		phonseSet.add(p1);
+
+		c.phones.addAll(phonseSet);
+
+		Customers test = customersRepository.save(c);
+
+		assertNotNull(test);
+
+	}
 
 	@Test
 	void testGetCustomer() throws Exception {
