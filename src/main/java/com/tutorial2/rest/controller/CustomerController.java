@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tutorial2.rest.domain.Customers;
 import com.tutorial2.rest.dto.Customer;
 import com.tutorial2.rest.repository.CustomersRepository;
+import com.tutorial2.rest.service.DataService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8088")
@@ -24,6 +25,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomersRepository customersRepository;
+
+	@Autowired
+	private DataService dataService;
 
 	@GetMapping("/test")
 	public ResponseEntity<String> test() {
@@ -34,17 +38,7 @@ public class CustomerController {
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
 
-		Optional<Customers> opt = customersRepository.findById(id);
-		if (opt.isPresent()) {
-			Customers customers = opt.get();
-			Customer result = new Customer();
-			result.setId(customers.getId());
-			result.setName(customers.getName());
-			return ResponseEntity.status(200).body(result);
-
-		}
-
-		return ResponseEntity.status(400).body(new Customer());
+		return dataService.getCustomer(id);
 	}
 
 	@DeleteMapping("/customer/{id}")
