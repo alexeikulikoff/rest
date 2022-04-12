@@ -34,7 +34,7 @@ public class CustomerController {
 	@GetMapping("/test")
 	public ResponseEntity<String> test() {
 
-		return ResponseEntity.ok("HelloWorld");
+		return ResponseEntity.ok("HelloWorld 111");
 	}
 
 	@GetMapping("/customer/{id}")
