@@ -88,7 +88,7 @@ class RestApplicationTests {
 
 	}
 
-	@Test
+//	@Test
 	void testGetCustomer() throws Exception {
 		Gson gson = new Gson();
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();

@@ -1,12 +1,12 @@
 package com.tutorial2.rest.domain;
 
-import java.util.Objects;
+import org.hibernate.annotations.SortNatural;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "customers")
@@ -33,6 +33,12 @@ public class Customers implements Comparable<Customers> {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@SortNatural
+	@Column(name = "phone", unique = true, nullable = false)
+	@OneToMany(cascade = CascadeType.ALL)
+	public SortedSet<Phones> phones = new TreeSet<>();
+
 
 	@Override
 	public String toString() {
